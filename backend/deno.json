@@ -1,13 +1,22 @@
 {
   "tasks": {
-    "start": "deno run --allow-net main.ts"
+    "start": "deno run -A --watch main.ts",
+    "test": "deno test --allow-env --allow-read agent/runner.test.ts",
+    "eval": "deno run --allow-env --allow-net --allow-read evals/run.ts",
+    "db:generate": "drizzle-kit generate",
+    "db:migrate": "drizzle-kit migrate",
+    "db:seed": "deno run --allow-net --allow-env --allow-read db/seed.ts"
   },
   "nodeModulesDir": "auto",
   "imports": {
+    "@2or3godzillas/utils": "jsr:@2or3godzillas/utils@^0.1.9",
     "@types/pg": "npm:@types/pg@^8.20.0",
+    "date-fns": "npm:date-fns@^4.1.0",
+    "dotenv": "npm:dotenv@^17.4.2",
     "drizzle-kit": "npm:drizzle-kit@^0.31.10",
     "drizzle-orm": "npm:drizzle-orm@^0.45.2",
     "hono": "jsr:@hono/hono@^4.12.18",
+    "openai": "npm:openai@^4",
     "pg": "npm:pg@^8.20.0"
   },
   "compilerOptions": {

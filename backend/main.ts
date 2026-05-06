@@ -1,9 +1,18 @@
-import { Hono } from 'hono'
+import { Hono } from "hono";
+import { shiftsRouter } from "./routers/shifts.ts";
+import { chatRouter } from "./routers/chat.ts";
+import { wsRouter } from "./ws.ts";
 
-const app = new Hono()
+const app = new Hono();
 
-app.get('/', (c) => {
-  return c.text('Hello Hono!')
-})
+app.get("/", (c) => {
+  return c.text("Hello Hono!");
+});
 
-Deno.serve(app.fetch)
+app.get("/health", (c) => c.json({ status: "ok", timestamp: new Date() }));
+
+app.route("/api/shifts", shiftsRouter);
+app.route("/api/chat", chatRouter);
+app.route("/api/ws", wsRouter);
+
+Deno.serve(app.fetch);
